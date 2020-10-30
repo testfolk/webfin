@@ -1,0 +1,83 @@
+  swagger: "2.0"
+  info:
+    title: web interface to financial functions
+    description: A demo on wrapping python functions in finance using REST interface
+    version: 1.0.0
+  basePath: /api/v1
+  definitions:
+    Option:
+      properties:
+        S0:
+          type: integer
+          example: 100
+        K:
+          type: integer
+          example: 105
+        T:
+          type: integer
+          example: 1
+        r:
+          type: integer
+          example: 0.05
+        sigma:
+          type: integer
+          example: 0.2
+      required:
+        - S0
+        - K
+        - T
+        - r
+        - sigma
+  paths:
+    /healthz:
+      get:
+        description: Readiness probe endpoint
+        tags:
+        - Health check
+        produces:
+        - text/plain
+        responses:
+            "200":
+                description: successful operation. Return "live" text
+            "405":
+                description: invalid HTTP Method
+    /bsm/value:
+      post:
+        summary: return bsm value
+        description: This end-point computes BMS value for European Option
+        tags:
+        - BSM
+        parameters:
+        - in: body
+          name: body
+          description: BSM Value
+          required: true
+          examples:
+            application/json: {"value": 8.021352235143176 }
+          schema:
+            $ref: '#/definitions/Option'
+        produces:
+          - application/json
+        responses:
+          200:
+            description: successful operation. Return value
+    /bsm/vega:
+      post:
+        summary: return bsm vega
+        description: This end-point computes BMS vega for European Option
+        tags:
+        - BSM
+        parameters:
+        - in: body
+          name: body
+          description: BSM Vega
+          required: true
+          examples:
+            application/json: {"vega": 8.021352235143176 }
+          schema:
+            $ref: '#/definitions/Option'
+        produces:
+          - application/json
+        responses:
+          200:
+            description: successful operation. Return vega
