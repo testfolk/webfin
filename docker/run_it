@@ -1,0 +1,2 @@
+docker build -t webfin-python .
+docker run -it -v /share/g_drive/dev/webfin/:/webfin webfin-python
