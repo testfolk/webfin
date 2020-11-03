@@ -1,0 +1,6 @@
+aiohttp
+aiohttp-swagger
+numpy
+scipy
+pytest
+pytest-aiohttp
