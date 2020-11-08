@@ -6,23 +6,23 @@ from ..fin import BsmCalculator
 
 from . import forms
 from ..core  import CalculationRequest
-from from_dict import from_dict
+
 
 
 @template('eval.html')
 async def optcalc(request):
-
-    optForm = CalculationRequest.CalculationRequest(tenor='1y', spot=1.3, strike=1.39, premium=None, riskFreeRate=0.0533, volatility=0.3938, callPut='Call')
+    optForm = CalculationRequest.CalculationRequest(tenor=0.6, spot=1.3, strike=1.39 ,riskFreeRate=0.0533, volatility=0.3938 )
     form = forms.EvalForm(obj=optForm)
     return {'form': form}
 
 
+@template('result.html')
 async def calculate(request):
     data = await request.post()
-    req = from_dict(CalculationRequest.CalculationRequest,data)
     calc = BsmCalculator.BsmCalculator()
-    response =  calc.calculate( CalculationRequest.CalculationRequest(req))
-    return web.Response(text="calculated {}".format(response.premium))
+    response =  calc.calculate(CalculationRequest.from_request(data))
+    return {'spot': data['spot'],'strike': data['strike'], 'tenor': data['tenor'],'premium': response.premium,}
+
 
 async def value(request):
     data = await request.json()

@@ -8,12 +8,17 @@
     {{ render_field(form.tenor) }}
     {{ render_field(form.riskFreeRate) }}
     {{ render_field(form.volatility) }}
-    {{ render_field(form.callPut) }}
-    {{ render_field(form.premium) }}
-    {{ render_field(form.solveFor) }}
 
   </dl>
-  <p><input type=submit value=Calculate>
+
+  {% if premium %}
+  <h1>
+    Result: {{premium}}
+  </h1>
+  {% else %}
+    <p><input type=submit value=Calculate></p>
+  {% endif%}
+
 
 
 </form>

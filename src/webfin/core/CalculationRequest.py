@@ -1,13 +1,16 @@
 import dataclasses
-
 @dataclasses.dataclass
 class CalculationRequest:
-    tenor:str
+    tenor:float
     spot: float
     strike: float
-    premium: float
     riskFreeRate: float
     volatility: float
-    callPut: str
 
-
+def from_request( data):
+    return CalculationRequest(
+        tenor = float(data['tenor']),
+        spot = float(data['spot']),
+        strike = float(data['strike']),
+        riskFreeRate = float(data['riskFreeRate']),
+        volatility=float(data['volatility']))
