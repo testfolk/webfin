@@ -26,7 +26,7 @@ def attach_debugger():
 async def init_app(argv=None):
     app = web.Application()
     aiohttp_jinja2.setup(app,
-                         loader=jinja2.FileSystemLoader('/webfin/src/webfin/web/templates'))
+                         loader=jinja2.FileSystemLoader('/src/webfin/web/templates'))
     # setup views and routes
     setup_routes(app, '/api/v1')
     swagger_path = webfin.root_dir / 'web' / 'opendoc.yaml'
