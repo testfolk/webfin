@@ -4,7 +4,8 @@ import logging
 import pdb
 import sys
 import traceback
-
+import aiohttp_jinja2
+import jinja2
 from aiohttp import web
 import webfin
 from webfin.web.routes import setup_routes
@@ -24,6 +25,8 @@ def attach_debugger():
 
 async def init_app(argv=None):
     app = web.Application()
+    aiohttp_jinja2.setup(app,
+                         loader=jinja2.FileSystemLoader('/webfin/src/webfin/web/templates'))
     # setup views and routes
     setup_routes(app, '/api/v1')
     swagger_path = webfin.root_dir / 'web' / 'opendoc.yaml'

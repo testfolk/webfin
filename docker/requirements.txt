@@ -1,6 +1,10 @@
+dataclasses
+from_dict
 aiohttp
 aiohttp-swagger
 numpy
 scipy
 pytest
 pytest-aiohttp
+aiohttp_jinja2
+WTForms
