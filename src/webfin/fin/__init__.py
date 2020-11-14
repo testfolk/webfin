@@ -1,4 +1,4 @@
-from typing import NamedTuple, Any
+from typing import NamedTuple
 
 
 class Option(NamedTuple):

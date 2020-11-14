@@ -1,13 +1,10 @@
-import webfin
-
-from . import views, apiv1
+from . import apiv1, views
 
 
 def setup_routes(app, prefix=''):
     # app.router.add_get(f'{prefix}/', index)
     app.router.add_get(f'{prefix}/optcalc', views.optcalc, name='optcalc')
     app.router.add_post(f'{prefix}/optcalc', views.optcalc, name='optcalc')
-    app.router.add_post(f'{prefix}/calculate', views.calculate, name='calculate')
 
 
 def setup_rest_routes(app, prefix=''):

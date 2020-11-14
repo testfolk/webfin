@@ -13,14 +13,12 @@ call_premium_cases = [
 ]
 
 
-def test_call_value():
-    given = {"S0": 100, "K": 105, "T": 1, "r": 0.05, "sigma": 0.2}
-    expected = pytest.approx(8.020, 8.022)
-    actual = bsm.call_value(**given)
-    assert actual == expected
-
-
 @pytest.mark.parametrize('option, premium', call_premium_cases)
 def test_call_premium(option, premium):
     actual = bsm.call_premium(option)
     assert actual == premium
+
+@pytest.mark.parametrize('option, vega', call_premium_cases)
+def test_call_vega(option, vega):
+    actual = bsm.vega(option)
+    assert actual == vega

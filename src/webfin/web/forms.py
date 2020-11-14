@@ -1,4 +1,4 @@
-from wtforms import Form, BooleanField, StringField, IntegerField, DateTimeField, RadioField, FloatField, SelectField, validators
+from wtforms import FloatField, Form, validators
 
 
 class OptionForm(Form):
