@@ -7,27 +7,27 @@
   definitions:
     Option:
       properties:
-        S0:
+        spot:
           type: integer
           example: 100
-        K:
-          type: integer
-          example: 105
-        T:
+        tenor:
           type: integer
           example: 1
-        r:
+        strike:
+          type: integer
+          example: 105
+        rate:
           type: integer
           example: 0.05
-        sigma:
+        volatility:
           type: integer
           example: 0.2
       required:
-        - S0
-        - K
-        - T
-        - r
-        - sigma
+        - spot
+        - tenor
+        - strike
+        - rate
+        - volatility
   paths:
     /healthz:
       get:

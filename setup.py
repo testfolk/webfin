@@ -10,8 +10,10 @@ setup(
     name='Webfin',
     version=version,
     install_requires=[
+        'wtforms',
         'aiohttp',
         'aiohttp-swagger',
+        'aiohttp_jinja2',
         'numpy',
         'scipy',
     ],

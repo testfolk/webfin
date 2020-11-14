@@ -25,7 +25,7 @@ Development
 
 To install in a development mode, do::
 
-  pip install -e /path/to/project
+  pip install -e .
 
 or::
 
@@ -55,4 +55,19 @@ Installing the library would add a command ``webfin`` on the command line (or in
 
 To run the python api server do::
 
-  webfin serve
+  webfin serve -H 127.0.0.1 -p 8080
+
+Then navigate to `opt calc endpoint`_ for an option calculator or to the `swagger api`_
+
+Alternatively, if you prefer to run the docker container, you will need to build it first::
+
+  docker build . -t webfin
+
+
+Then run::
+
+  docker run -it -p8080:80 webfin
+
+.. _`dev server`: http://127.0.0.1:8080
+.. _`opt calc endpoint`: http://127.0.0.1:8080/optcalc
+.. _`swagger api`: http://127.0.0.1:8080/api/v1/doc

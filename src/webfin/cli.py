@@ -1,14 +1,15 @@
 import argparse
-from aiohttp_swagger import setup_swagger
 import logging
 import pdb
 import sys
 import traceback
+
 import aiohttp_jinja2
 import jinja2
-from aiohttp import web
 import webfin
-from webfin.web.routes import setup_routes
+from aiohttp import web
+from aiohttp_swagger import setup_swagger
+from webfin.web import routes
 
 
 def attach_debugger():
@@ -25,10 +26,11 @@ def attach_debugger():
 
 async def init_app(argv=None):
     app = web.Application()
-    aiohttp_jinja2.setup(app,
-                         loader=jinja2.FileSystemLoader('/src/webfin/web/templates'))
+    templates_path = webfin.root_dir / 'web' / 'templates'
+    aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader(templates_path))
     # setup views and routes
-    setup_routes(app, '/api/v1')
+    routes.setup_routes(app)
+    routes.setup_rest_routes(app, '/api/v1')
     swagger_path = webfin.root_dir / 'web' / 'opendoc.yaml'
     setup_swagger(app, swagger_url="/api/v1/doc", swagger_from_file=swagger_path)
     # setup_swagger(app, swagger_url="/api/v1/doc", ui_version=2)

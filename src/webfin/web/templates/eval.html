@@ -1,12 +1,12 @@
 {% from "_formhelpers.html" import render_field %}
 
 <h2> let's make this prettier with some CSS !</h2>
-<form method=POST action="/api/v1/calculate">
+<form method=POST action="/optcalc">
   <dl>
     {{ render_field(form.spot) }}
     {{ render_field(form.strike) }}
     {{ render_field(form.tenor) }}
-    {{ render_field(form.riskFreeRate) }}
+    {{ render_field(form.rate) }}
     {{ render_field(form.volatility) }}
 
   </dl>
@@ -15,14 +15,6 @@
   <h1>
     Result: {{premium}}
   </h1>
-  {% else %}
-    <p><input type=submit value=Calculate></p>
   {% endif%}
-
-
-
+    <p><input type=submit value=Calculate></p>
 </form>
-
-
-
-
