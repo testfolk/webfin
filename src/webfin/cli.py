@@ -10,6 +10,7 @@ import webfin
 from aiohttp import web
 from aiohttp_swagger import setup_swagger
 from webfin.web import routes
+from webfin.web.middlewares import setup_middlewares
 
 
 def attach_debugger():
@@ -33,7 +34,7 @@ async def init_app(argv=None):
     routes.setup_rest_routes(app, '/api/v1')
     swagger_path = webfin.root_dir / 'web' / 'opendoc.yaml'
     setup_swagger(app, swagger_url="/api/v1/doc", swagger_from_file=swagger_path)
-    # setup_swagger(app, swagger_url="/api/v1/doc", ui_version=2)
+    setup_middlewares(app)
     return app
 
 

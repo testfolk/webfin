@@ -1,0 +1,9 @@
+:root {
+    --links: blue; /* Always applied */
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --links: yellow; /* Only applied in dark mode (overrides blue) */
+    }
+}
