@@ -5,6 +5,6 @@ WORKDIR /src/webfin
 COPY . .
 RUN python -m pip install .
 EXPOSE 80
-CMD ["webfin", "serve", "--port" ,"80", "--host", "0.0.0.0"]
+webCMD ["webfin", "serve", "--port" ,"80", "--host", "0.0.0.0"]
 
 #CMD /bin/bash
