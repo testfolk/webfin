@@ -10,6 +10,7 @@ setup(
     name='Webfin',
     version=version,
     install_requires=[
+        'jinja2',
         'wtforms',
         'aiohttp',
         'aiohttp-swagger',
