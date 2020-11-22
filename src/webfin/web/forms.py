@@ -1,9 +1,12 @@
-from wtforms import FloatField, Form, validators
+from wtforms import FloatField, SelectField,Form, validators
 
 
 class OptionForm(Form):
     spot = FloatField('Spot', [validators.Length(min=4, max=25)])
     strike = FloatField('Strike')
-    tenor = FloatField('Tenor')
+    tenor = SelectField(u'Tenor', choices=[( 0.083333,"1m"), (0.25,"3m"),(0.5,"6m")],coerce=float)
     rate = FloatField('Risk Free Rate', [validators.Length(min=4, max=25)])
     volatility = FloatField('Volatility', [validators.Length(min=4, max=25)])
+    premium = FloatField('Premium', [validators.Length(min=4, max=25)])
+    solveFor = SelectField(u'Solve For', choices = [('Premium', 'Premium'),('Volatility','Volatility')])
+

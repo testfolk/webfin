@@ -7,6 +7,8 @@ class Option(NamedTuple):
     strike: float  # K
     rate: float  # r
     volatility: float  # sigma
+    premium: float
+    solveFor: str ='Premium'
 
     @classmethod
     def from_request(cls, data):

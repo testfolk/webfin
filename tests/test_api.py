@@ -22,7 +22,8 @@ async def test_call_value(client):
         "strike": 105,
         "tenor": 1,
         "rate": 0.05,
-        "volatility": 0.2
+        "volatility": 0.2,
+        "premium" : 0.0
     }
     resp = await client.post("/api/v1/bsm/value", json=data)
     assert resp.status == 200, await resp.json()
@@ -36,7 +37,9 @@ async def test_vega(client):
         "strike": 105,
         "tenor": 1,
         "rate": 0.05,
-        "volatility": 0.2
+        "volatility": 0.2,
+        "premium": 0.0
+
     }
     resp = await client.post("/api/v1/bsm/vega", json=data)
     assert resp.status == 200, await resp.json()

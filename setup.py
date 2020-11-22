@@ -17,5 +17,5 @@ setup(
         'numpy',
         'scipy',
     ],
-    extras_require={'test': ['pytest', 'pytest-aiohttp']},
+    extras_require={'test': ['pytest', 'pytest-aiohttp','htmldom']},
 )

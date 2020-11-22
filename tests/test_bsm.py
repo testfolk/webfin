@@ -2,7 +2,7 @@ import pytest
 
 from webfin.fin import Option, bsm
 
-option_sample = Option(spot=100, tenor=1, strike=105, rate=0.05, volatility=0.2)
+option_sample = Option(spot=100, tenor=1, strike=105, rate=0.05, volatility=0.2,premium=0.0)
 
 call_premium_cases = [
     pytest.param(option_sample, pytest.approx(8.020, 8.022), id='basic-case'),
