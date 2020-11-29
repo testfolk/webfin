@@ -13,3 +13,10 @@ class Option(NamedTuple):
     @classmethod
     def from_request(cls, data):
         return cls(**data)
+
+
+
+class OptionResponse(NamedTuple):
+    request:Option
+    results:dict
+

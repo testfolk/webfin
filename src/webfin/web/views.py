@@ -1,7 +1,8 @@
 import aiohttp_jinja2
 from aiohttp import web
 
-from webfin.fin import Option, bsm
+from webfin.fin import bsm
+from webfin.core import Option
 
 from . import forms
 
