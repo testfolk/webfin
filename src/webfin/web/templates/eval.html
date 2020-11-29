@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 {% block content %}
 <div class="container" style="width:80%">
@@ -10,88 +9,118 @@
                 <div class="card-header">
                     Options Calculator
                 </div>
-                <div class="card-body"></div>
-                <form method=POST action="/optcalc">
-                    <div class="row">
-                        <div class="col">
-                            <div>{{ form.spot.label }}</div>
+                <div class="card-body">
+                    <form method=POST action="/optcalc">
+                        <div class="row">
+                            <div class="col">
+                                <div>{{ form.spot.label }}</div>
+                            </div>
+                            <div class="col">
+                                <div>{{ form.spot() }}</div>
+                            </div>
                         </div>
-                        <div class="col">
-                            <div>{{ form.spot() }}</div>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <div>{{ form.strike.label }}</div>
-                        </div>
-                        <div class="col">
-                            <div>{{ form.strike() }}</div>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col">
-                            <div>{{ form.tenor.label }}</div>
-                        </div>
-                        <div class="col">
-                            <div>{{ form.tenor() }}</div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <div>{{ form.rate.label }}</div>
-                        </div>
-                        <div class="col">
-                            <div>{{ form.rate() }}</div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        {% if sf == 'Volatility' %}
-                        <div class="col">
-                            <div>{{ form.volatility.label }}</div>
-                        </div>
-                        <div class="col">
-                            <div>{{ form.volatility() }}</div>
+                        <div class="row">
+                            <div class="col">
+                                <div>{{ form.strike.label }}</div>
+                            </div>
+                            <div class="col">
+                                <div>{{ form.strike() }}</div>
+                            </div>
                         </div>
 
 
-                        {% else %}
-                        <div class="col">
-                            <div>{{ form.premium.label }}</div>
-                        </div>
-                        <div class="col">
-                            <div>{{ form.premium() }}</div>
-                        </div>
-
-                        {% endif %}
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col">
-                            {{ form.solveFor.label }}
-                        </div>
-                        <div class="col">
-                            {{ form.solveFor( onChange= " solveForChanged() ") }}
+                        <div class="row">
+                            <div class="col">
+                                <div>{{ form.tenor.label }}</div>
+                            </div>
+                            <div class="col">
+                                <div>{{ form.tenor() }}</div>
+                            </div>
                         </div>
 
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <p><input type=submit value=Calculate></p>
+                        <div class="row">
+                            <div class="col">
+                                <div>{{ form.rate.label }}</div>
+                            </div>
+                            <div class="col">
+                                <div>{{ form.rate() }}</div>
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="row">
+                            {% if sf == 'Volatility' %}
+                            <div class="col">
+                                <div>{{ form.premium.label }}</div>
+                            </div>
+                            <div class="col">
+                                <div>{{ form.premium() }}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col">
+                                <div>
+                                    {% if sf == 'Volatility' %}
+                                    Est. Vol.
+                                    {% else %}
+                                    Volatility
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div>{{ form.volatility() }}</div>
+                            </div>
 
 
-                </form>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col">
+                                {{ form.solveFor.label }}
+                            </div>
+                            <div class="col">
+                                {{ form.solveFor( onChange= " solveForChanged() ") }}
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p><input type=submit value=Calculate></p>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+
+                </div>
+
 
                 {% if result %}
-                <h1>we have a result !</h1>
-                {% endif %}
+                   <div class="card-footer">
+                       <table class="table table-bordered table-sm">
+                           <tr>
+                               <td><small><span class="font-weight-bold">{{result.solution.caption}}</span></small></td>
+                               <td><small><span class="font-weight-bold">{{result.solution.content}}</span></small></td>
+                           </tr>
+                           {% for  detail in result.details %}
+                           <tr>
+                               <td><small>{{ detail.caption }}</small></td>
+                               <td><small>{{ detail.content }}</small></td>
+                           </tr>
+                           {%  endfor %}
+
+
+
+                       </table>
+
+
+                </div>
+                {% endif%}
             </div>
         </div>
         <div class="col-6">

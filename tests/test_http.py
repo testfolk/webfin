@@ -20,9 +20,7 @@ async def test_optcalc_route_with_default_solve_for(client):
     txt = await resp.text()
     doc = html.fromstring(txt)
     with pytest.raises(KeyError):
-        doc.get_element_by_id('volatility')
-    premium = doc.get_element_by_id('premium')
-    assert premium.value == '0.0'
+        doc.get_element_by_id('premium')
 
 
 async def test_optcalc_route_with_solve_for_volatility(client):
@@ -37,5 +35,7 @@ async def test_optcalc_route_with_solve_for_premium(client):
     resp = await client.get("/optcalc?sf=Premium")
     txt = await resp.text()
     doc = html.fromstring(txt)
-    premium = doc.get_element_by_id('premium')
-    assert premium.value == '0.0'
+    with pytest.raises(KeyError):
+        doc.get_element_by_id('premium')
+
+
