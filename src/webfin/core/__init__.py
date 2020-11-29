@@ -1,5 +1,5 @@
 from typing import NamedTuple
-
+from typing import List
 
 class Option(NamedTuple):
     spot: float  # S0
@@ -15,8 +15,13 @@ class Option(NamedTuple):
         return cls(**data)
 
 
+class ResultItem(NamedTuple):
+    caption: str
+    content: str
 
 class OptionResponse(NamedTuple):
     request:Option
-    results:dict
+    solution: ResultItem
+    details: List[ResultItem]
+
 
