@@ -56,6 +56,7 @@ def call_imp_vol(S0, K, T, r, C0, sigma_est, it=100):
     simga_est : float
             numerically estimated implied volatility
     """
+
     for _ in range(it):
-        sigma_est -= ((call_premium(S0, K, T, r, sigma_est) - C0) / vega(S0, K, T, r, sigma_est))
+        sigma_est -= ((call_premium(Option(strike= K, tenor=T, rate=r, volatility=sigma_est,spot=S0,premium=C0)) - C0) / vega(Option(strike=K, tenor=T, rate=r, volatility=sigma_est,premium=C0,spot=S0)))
     return sigma_est
