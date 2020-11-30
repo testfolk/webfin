@@ -1,124 +1,116 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container" style="width:80%">
+	<div class="container" style="width:80%">
 
-    <div class="row" style="padding-top:100px">
-        <div class="col-2"></div>
-        <div class="col-5">
-            <div class="card">
-                <div class="card-header">
-                    Options Calculator
-                </div>
-                <div class="card-body">
-                    <form method=POST action="/optcalc">
-                        <div class="row">
-                            <div class="col">
-                                <div>{{ form.spot.label }}</div>
-                            </div>
-                            <div class="col">
-                                <div>{{ form.spot() }}</div>
-                            </div>
-                        </div>
+		<div class="row" style="padding-top:100px">
+			<div class="col-2"></div>
+			<div class="col-5">
+				<div class="card">
+					<div class="card-header">
+						Options Calculator
+					</div>
+					<div class="card-body">
+						<form method=POST action="/optcalc">
+							<div class="row">
+								<div class="col">
+									<div>{{ form.spot.label }}</div>
+								</div>
+								<div class="col">
+									<div>{{ form.spot() }}</div>
+								</div>
+							</div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div>{{ form.strike.label }}</div>
-                            </div>
-                            <div class="col">
-                                <div>{{ form.strike() }}</div>
-                            </div>
-                        </div>
+							<div class="row">
+								<div class="col">
+									<div>{{ form.strike.label }}</div>
+								</div>
+								<div class="col">
+									<div>{{ form.strike() }}</div>
+								</div>
+							</div>
 
+							<div class="row">
+								<div class="col">
+									<div>{{ form.tenor.label }}</div>
+								</div>
+								<div class="col">
+									<div>{{ form.tenor() }}</div>
+								</div>
+							</div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div>{{ form.tenor.label }}</div>
-                            </div>
-                            <div class="col">
-                                <div>{{ form.tenor() }}</div>
-                            </div>
-                        </div>
+							<div class="row">
+								<div class="col">
+									<div>{{ form.rate.label }}</div>
+								</div>
+								<div class="col">
+									<div>{{ form.rate() }}</div>
+								</div>
+							</div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div>{{ form.rate.label }}</div>
-                            </div>
-                            <div class="col">
-                                <div>{{ form.rate() }}</div>
-                            </div>
-                        </div>
+							<div class="row">
+								{% if sf == 'Volatility' %}
+									<div class="col">
+										<div>{{ form.premium.label }}</div>
+									</div>
+									<div class="col">
+										<div>{{ form.premium() }}</div>
+									</div>
+								{% endif %}
+							</div>
 
-                        <div class="row">
-                            {% if sf == 'Volatility' %}
-                            <div class="col">
-                                <div>{{ form.premium.label }}</div>
-                            </div>
-                            <div class="col">
-                                <div>{{ form.premium() }}</div>
-                            </div>
-                            {% endif %}
-                        </div>
+							<div class="row">
 
-                        <div class="row">
+								<div class="col">
+									<div>
+										{% if sf == 'Volatility' %}
+											Est. Vol.
+										{% else %}
+											Volatility
+										{% endif %}
+									</div>
+								</div>
+								<div class="col">
+									<div>{{ form.volatility() }}</div>
+								</div>
 
-                            <div class="col">
-                                <div>
-                                    {% if sf == 'Volatility' %}
-                                    Est. Vol.
-                                    {% else %}
-                                    Volatility
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div>{{ form.volatility() }}</div>
-                            </div>
+							</div>
 
+							<div class="row">
+								<div class="col">
+									{{ form.solveFor.label }}
+								</div>
+								<div class="col">
+									{{ form.solveFor( onChange= " solveForChanged() ") }}
+								</div>
 
-                        </div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<p><input type=submit value=Calculate></p>
+								</div>
+							</div>
 
+						</form>
+					</div>
 
-                        <div class="row">
-                            <div class="col">
-                                {{ form.solveFor.label }}
-                            </div>
-                            <div class="col">
-                                {{ form.solveFor( onChange= " solveForChanged() ") }}
-                            </div>
+					{% if premium %}
+						<div class="card-footer">
+							Result: {{premium}}
+						</div>
+					{% endif%}
+				</div>
+			</div>
+			<div class="col-6">
+			</div>
+		</div>
+	</div>
+	</div>
 
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p><input type=submit value=Calculate></p>
-                            </div>
-                        </div>
-
-
-                    </form>
-
-
-                </div>
-
-
-                {% if premium %}
-
-                   <div class="card-footer">
-                    Result: {{premium}}
-                </div>
-                {% endif%}
-            </div>
-        </div>
-        <div class="col-6">
-        </div>
-    </div>
-</div>
-</div>
-
-<script>
-    function solveForChanged() {
-        var newLoc = window.location.origin + window.location.pathname + '?sf=' + document.getElementById('solveFor').value
-        location.href = newLoc
-    }
-</script>
+	<script>
+		function solveForChanged() {
+			var newLoc = window.location.origin + window.location.pathname + '?sf=' + document.getElementById('solveFor').value
+			location.href = newLoc
+		}
+	</script>
 
 {%endblock%}
