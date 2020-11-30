@@ -10,7 +10,8 @@ async def client(aiohttp_client):
 
 
 async def test_liveness(client):
-    resp = await client.get("/api/v1/healthz")
+    url = client.app.router['healthz'].url_for()
+    resp = await client.get(url)
     assert resp.status == 200, await resp.text()
     data = await resp.text()
     assert data == 'live'
@@ -23,9 +24,9 @@ async def test_call_value(client):
         "tenor": 1,
         "rate": 0.05,
         "volatility": 0.2,
-        "premium" : 0.0
     }
-    resp = await client.post("/api/v1/bsm/value", json=data)
+    url = client.app.router['premium'].url_for()
+    resp = await client.post(url, json=data)
     assert resp.status == 200, await resp.json()
     data = await resp.json()
     assert data == {'value': 8.021352235143176}
@@ -38,10 +39,9 @@ async def test_vega(client):
         "tenor": 1,
         "rate": 0.05,
         "volatility": 0.2,
-        "premium": 0.0
-
     }
-    resp = await client.post("/api/v1/bsm/vega", json=data)
+    url = client.app.router['vega'].url_for()
+    resp = await client.post(url, json=data)
     assert resp.status == 200, await resp.json()
     data = await resp.json()
     assert data == {'value': 54.22283335848053}
