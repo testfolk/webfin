@@ -1,14 +1,10 @@
 import aiohttp_jinja2
 from aiohttp import web
-
-
-from webfin.fin import bsm
 from webfin.core import Option
 from webfin.core import OptionResponse
 from webfin.core import broker
 
 from . import forms
-
 
 
 async def optcalc(request):
@@ -24,9 +20,9 @@ async def optcalc(request):
     elif request.method == 'POST':
         data = await request.post()
         form = forms.OptionForm(data)
-        option:Option = Option.from_request(form.data)
-        response:OptionResponse = broker.evaluate(option)
-        context = {'form': form, 'result' : response}
+        option: Option = Option.from_request(form.data)
+        response: OptionResponse = broker.evaluate(option)
+        context = {'form': form, 'result': response}
         response = aiohttp_jinja2.render_template('eval.html', request, context)
         return response
 

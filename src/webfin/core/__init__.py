@@ -1,6 +1,7 @@
 from typing import NamedTuple
 from typing import List
 
+
 class Option(NamedTuple):
     spot: float  # S0
     tenor: float  # T
@@ -19,9 +20,8 @@ class ResultItem(NamedTuple):
     caption: str
     content: str
 
+
 class OptionResponse(NamedTuple):
-    request:Option
+    request: Option
     solution: ResultItem
     details: List[ResultItem]
-
-
