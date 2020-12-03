@@ -84,6 +84,6 @@ def call_imp_vol(S0, K, T, r, C0, sigma_est, it=100):
     simga_est : float
             numerically estimated implied volatility
     """
-    for i in range(it):
+    for _ in range(it):
         sigma_est -= ((call_value(S0, K, T, r, sigma_est) - C0) / vega(S0, K, T, r, sigma_est))
     return sigma_est

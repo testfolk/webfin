@@ -37,5 +37,3 @@ async def test_optcalc_route_with_solve_for_premium(client):
     doc = html.fromstring(txt)
     with pytest.raises(KeyError):
         doc.get_element_by_id('premium')
-
-

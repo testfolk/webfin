@@ -10,7 +10,7 @@ from typing import List
 
 def solveForPremium(opt: Option) -> OptionResponse:
     decimalResult: float = bsm.call_value(opt.spot, opt.strike, opt.tenor, opt.rate, opt.volatility)
-    solution: ResultItem = ResultItem(caption="Premium", content=str(decimalResult))
+    solution: ResultItem = ResultItem(caption="Premium", content=decimalResult)
     details: List[ResultItem] = [
         ResultItem(caption="Spot", content=str(opt.spot)),
         ResultItem(caption="Strike", content=str(opt.strike)),
@@ -24,7 +24,7 @@ def solveForPremium(opt: Option) -> OptionResponse:
 def solveForImplVol(opt: Option) -> OptionResponse:
     decimalResult = bsm.call_imp_vol(opt.spot, opt.strike, opt.tenor, opt.rate, opt.premium, opt.volatility)
 
-    solution: ResultItem = ResultItem(caption="Impl. Vol.", content=str(decimalResult))
+    solution: ResultItem = ResultItem(caption="Impl. Vol.", content=decimalResult)
     details: List[ResultItem] = [
         ResultItem(caption="Spot", content=str(opt.spot)),
         ResultItem(caption="Strike", content=str(opt.strike)),
