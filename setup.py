@@ -11,7 +11,7 @@ setup(
     version=version,
     install_requires=[
         'jinja2',
-        'wtforms',
+        'wtforms>=3.0.0a1',
         'aiohttp',
         'aiohttp-swagger',
         'aiohttp-session',

@@ -76,6 +76,7 @@ def test_solve_for_impl_vol_routing(answer):
 def test_service_broker_fails_with_invalid_solve_for(answer):
     # TODO: is there a way to directly test that the method has been invoked rather than having to set up
     # a fake answer ?
+    obj = mock.MagicMock()
+    obj.solveFor = 'Unknown'
     with pytest.raises(KeyError):
-        pass
-        # broker.evaluate(option_sample._replace(solveFor='X', premium='0.1')) == answer.vol
+        broker.evaluate(obj)
