@@ -1,3 +1,5 @@
+import warnings
+warnings.filterwarnings('ignore', category=DeprecationWarning)
 import pytest
 from webfin.cli import init_app
 
