@@ -24,6 +24,14 @@ pipeline {
 			}
 		}
 	}
+	post {
+		always {
+			junit 'junit*.xml'
+		}
+		always {
+		  cobertura coberturaReportFile: 'coverage.xml'
+		}
+	}
 
 	options  {
 		buildDiscarder ( logRotator ( numToKeepStr:  '5' ,  artifactNumToKeepStr:  '5' ))
