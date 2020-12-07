@@ -3,7 +3,7 @@ import pytest
 from webfin.fin import bsm
 from webfin.core import Option
 
-option_sample = Option(spot=100, tenor=1, strike=105, rate=0.05, volatility=0.2,premium=0.0)
+option_sample = Option(spot=100, tenor=1, strike=105, rate=0.05, volatility=0.2, premium=0.0)
 
 call_premium_cases = [
     pytest.param(option_sample, pytest.approx(8.020, 8.022), id='basic-case'),
@@ -15,12 +15,12 @@ call_premium_cases = [
 
 
 @pytest.mark.parametrize('option, premium', call_premium_cases)
-def test_call_premium(option:Option, premium):
-    actual = bsm.call_value(option.spot, option.strike,option.tenor,option.rate,option.volatility)
+def test_call_premium(option: Option, premium):
+    actual = bsm.call_value(option.spot, option.strike, option.tenor, option.rate, option.volatility)
     assert actual == premium
 
 
 @pytest.mark.parametrize('option, vega', call_premium_cases)
 def test_call_vega(option, vega):
-    actual = bsm.vega(option.spot,option.strike,option.tenor,option.rate,option.volatility)
+    actual = bsm.vega(option.spot, option.strike, option.tenor, option.rate, option.volatility)
     assert actual == vega

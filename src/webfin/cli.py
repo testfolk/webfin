@@ -3,13 +3,13 @@ import logging
 import pdb
 import sys
 import traceback
-
 import aiohttp_jinja2
 import jinja2
 import webfin
 from aiohttp import web
 from aiohttp_swagger import setup_swagger
 from webfin.web import routes
+import warnings
 from webfin.web.middlewares import setup_middlewares
 
 
@@ -26,6 +26,8 @@ def attach_debugger():
 
 
 async def init_app(argv=None):
+
+    warnings.filterwarnings('ignore', category=DeprecationWarning)
     app = web.Application()
     templates_path = webfin.root_dir / 'web' / 'templates'
     aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader(templates_path))

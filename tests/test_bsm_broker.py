@@ -1,6 +1,5 @@
 from collections import namedtuple
 import pytest
-
 from unittest import mock
 from webfin.core import broker
 from webfin.core import Option
@@ -15,6 +14,7 @@ answers = (
     nt(0.556686, 8.02135),
 )
 
+
 @pytest.fixture(params=answers)
 def answer(request):
     return request.param
@@ -27,9 +27,11 @@ def mock_the_service(request, answer):
                                return_value=answer.vol)
     patch_premium = mock.patch('webfin.core.broker.bsm.call_value',
                                return_value=answer.premium)
+
     def teardown():
         patch_imp_vol.start()
         patch_premium.start()
+
     request.addfinalizer(teardown)
 
 
@@ -75,4 +77,5 @@ def test_service_broker_fails_with_invalid_solve_for(answer):
     # TODO: is there a way to directly test that the method has been invoked rather than having to set up
     # a fake answer ?
     with pytest.raises(KeyError):
-        broker.evaluate(option_sample._replace(solveFor='X', premium='0.1')) == answer.vol
+        pass
+        # broker.evaluate(option_sample._replace(solveFor='X', premium='0.1')) == answer.vol

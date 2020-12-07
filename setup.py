@@ -14,6 +14,7 @@ setup(
         'wtforms',
         'aiohttp',
         'aiohttp-swagger',
+        'aiohttp-session',
         'aiohttp_jinja2',
         'numpy',
         'scipy',

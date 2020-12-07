@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container" style="width:80%">
-
     <div class="row" style="padding-top:100px">
-        <div class="col-2"></div>
-        <div class="col-5">
+        <div class="col-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header coral_color">
                     Options Calculator
                 </div>
                 <div class="card-body">
@@ -19,7 +17,6 @@
                                 <div>{{ form.spot() }}</div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col">
                                 <div>{{ form.strike.label }}</div>
@@ -62,7 +59,7 @@
                         <div class="row">
 
                             <div class="col">
-                                <div>
+                                <div id="opt_calc_volatility_label">
                                     {% if sf == 'Volatility' %}
                                     Est. Vol.
                                     {% else %}
@@ -73,11 +70,7 @@
                             <div class="col">
                                 <div>{{ form.volatility() }}</div>
                             </div>
-
-
                         </div>
-
-
                         <div class="row">
                             <div class="col">
                                 {{ form.solveFor.label }}
@@ -89,51 +82,82 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p><input type=submit value=Calculate></p>
+                                <p><input class="btn btn-primary" type=submit value=Calculate></p>
+                            </div>
+                            <div class="col">
+                                <a href="#" onclick=" solveForChanged() " class="btn btn-secondary">Reset</a>
                             </div>
                         </div>
-
-
                     </form>
 
 
                 </div>
 
-
-                {% if result %}
-                   <div class="card-footer">
-                       <table class="table table-bordered table-sm">
-                           <tr>
-                               <td><small><span class="font-weight-bold">{{result.solution.caption}}</span></small></td>
-                               <td><small><span class="font-weight-bold">{{result.solution.content}}</span></small></td>
-                           </tr>
-                           {% for  detail in result.details %}
-                           <tr>
-                               <td><small>{{ detail.caption }}</small></td>
-                               <td><small>{{ detail.content }}</small></td>
-                           </tr>
-                           {%  endfor %}
-
-
-
-                       </table>
-
-
+                {% if form and form.form_errors %}
+                {% for error_msg in form.form_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{error_msg}}
                 </div>
-                {% endif%}
+
+                {% endfor %}
+
+                {% else %}
+
+                {% if results %}
+                <div class="card-footer">
+                    <h5 class="card-title">Results</h5>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        {% for result in results %}
+                        {% set active_attr = 'show active' if loop.index==loop.length else '' %}
+                        <li class="nav-item">
+                            <a class="nav-link {{ active_attr }}" id="tab_{{ loop.index }}" data-toggle="tab"
+                               href="#tab{{loop.index}}" role="tab"
+                               aria-controls="home" aria-selected="true">{{loop.index}}</a>
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        {% for result in results %}
+                        {% set active_attr = 'show active' if loop.index==loop.length else '' %}
+                        <div class="tab-pane fade {{active_attr}}" id="tab{{loop.index}}" role="tabpanel"
+                             aria-labelledby="tab_{{loop.index}}">
+                            <table class="table table-bordered table-sm">
+                                <tr class="optcalc_result_solution">
+                                    <td><small><span
+                                            class="font-weight-bold">{{result.solution.caption}}</span></small></td>
+                                    <td><small><span
+                                            class="font-weight-bold">{{result.solution.content}}</span></small></td>
+                                </tr>
+                                {% for detail in result.details %}
+                                <tr class="optcalc_result_detail">
+                                    <td><small>{{ detail.caption }}</small></td>
+                                    <td><small>{{ detail.content }}</small></td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% endif %}
+                {% endif %}
             </div>
-        </div>
-        <div class="col-6">
         </div>
     </div>
 </div>
-</div>
+
 
 <script>
     function solveForChanged() {
         var newLoc = window.location.origin + window.location.pathname + '?sf=' + document.getElementById('solveFor').value
         location.href = newLoc
     }
+
+
+
 </script>
+
 
 {%endblock%}
