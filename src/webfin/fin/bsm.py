@@ -35,10 +35,9 @@ def call_value(S0, K, T, r, sigma):
     present value of the European call option
     """
     S0 = float(S0)
-    d1 = (log(S0 / K) + (r + 0.5 * sigma**2) * T) / (sigma * sqrt(T))
-    d2 = (log(S0 / K) + (r - 0.5 * sigma**2) * T) / (sigma * sqrt(T))
-    value = (S0 * stats.norm.cdf(d1, 0.0, 1.0) -
-             K * exp(-r * T) * stats.norm.cdf(d2, 0.0, 1.0))
+    d1 = (log(S0 / K) + (r + 0.5 * sigma ** 2) * T) / (sigma * sqrt(T))
+    d2 = (log(S0 / K) + (r - 0.5 * sigma ** 2) * T) / (sigma * sqrt(T))
+    value = (S0 * stats.norm.cdf(d1, 0.0, 1.0) - K * exp(-r * T) * stats.norm.cdf(d2, 0.0, 1.0))
     # stats.norm.cdf —> cumulative distribution function for normal distribution
     return value
 
@@ -62,7 +61,7 @@ def vega(S0, K, T, r, sigma):
     partial derivative of BSM formula with respect to sigma, i.e. Vega
     """
     S0 = float(S0)
-    d1 = (log(S0 / K) + (r + 0.5 * sigma**2) * T) / (sigma * sqrt(T))
+    d1 = (log(S0 / K) + (r + 0.5 * sigma ** 2) * T) / (sigma * sqrt(T))
     v = S0 * stats.norm.cdf(d1, 0.0, 1.0) * sqrt(T)
     return v
 
@@ -85,7 +84,6 @@ def call_imp_vol(S0, K, T, r, C0, sigma_est, it=100):
     simga_est : float
             numerically estimated implied volatility
     """
-    for i in range(it):
-        sigma_est -= ((call_value(S0, K, T, r, sigma_est) - C0) /
-                      vega(S0, K, T, r, sigma_est))
+    for _ in range(it):
+        sigma_est -= ((call_value(S0, K, T, r, sigma_est) - C0) / vega(S0, K, T, r, sigma_est))
     return sigma_est

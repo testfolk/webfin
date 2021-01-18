@@ -1,0 +1,2 @@
+docker build -t webfin-python .
+docker run -it -v /share/g_drive/dev/webfin/:/webfin -p 8088:8088  webfin-python

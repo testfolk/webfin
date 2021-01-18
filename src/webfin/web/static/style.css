@@ -1,0 +1,27 @@
+:root {
+    --links: blue; /* Always applied */
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --links: yellow; /* Only applied in dark mode (overrides blue) */
+    }
+}
+.vertical_text {
+    font-size: 20px;
+    transform: rotate(90deg);
+    transform-origin: left, top;
+    -ms-transform: rotate(-90deg);
+    -ms-transform-origin:right, top;
+    -webkit-transform: rotate(-90deg);
+    -webkit-transform-origin:right, top;
+    position: absolute; top: 30%; left: 0%;
+    color: 	Coral;
+}
+.side_margin {
+    background: 	#383838
+
+}
+.coral_color {
+    color: 	Coral;
+}

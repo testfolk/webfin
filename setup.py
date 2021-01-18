@@ -10,10 +10,14 @@ setup(
     name='Webfin',
     version=version,
     install_requires=[
+        'jinja2',
+        'wtforms>=3.0.0a1',
         'aiohttp',
         'aiohttp-swagger',
+        'aiohttp-session',
+        'aiohttp_jinja2',
         'numpy',
         'scipy',
     ],
-    extras_require={'test': ['pytest', 'pytest-aiohttp']},
+    extras_require={'test': ['pytest', 'pytest-aiohttp', 'lxml']},
 )
